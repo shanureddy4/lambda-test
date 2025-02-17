@@ -1,0 +1,26 @@
+{
+  "name": "snapflow",
+  "version": "1.0.0",
+  "description": "Audio transcript alignment using echogarden",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "NODE_OPTIONS='--loader ts-node/esm' node src/index.ts",
+    "build": "tsc",
+    "dev": "NODE_OPTIONS='--loader ts-node/esm' node src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.11.19",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.744.0",
+    "@aws-sdk/client-ssm": "^3.749.0",
+    "@types/aws-lambda": "^8.10.147",
+    "echogarden": "2.0.14"
+  }
+}
