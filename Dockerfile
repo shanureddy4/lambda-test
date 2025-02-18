@@ -12,6 +12,6 @@ COPY . .
 COPY packages/ /root/.local/share/echogarden/packages
 RUN rm -rf packages
 RUN chmod -R +x /root/.local/share/echogarden/packages/
-RUN chmod +x /entrypoint.sh
+RUN chmod +x entrypoint.sh
 RUN chmod 1777 /tmp
-ENTRYPOINT ["/entrypoint_ls.sh"]
+ENTRYPOINT ["entrypoint.sh"]
