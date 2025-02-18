@@ -12,5 +12,6 @@ COPY . .
 COPY packages/ /root/.local/share/echogarden/packages
 RUN rm -rf packages
 RUN chmod -R +x /root/.local/share/echogarden/packages/
-
+RUN mkdir -p /tmp/home && \
+    ln -s /tmp/home /home  
 CMD ["dist/lambda.handler"]

@@ -1,33 +1,9 @@
-// process.env.HOME = '/tmp/home';
-
 import { APIGatewayProxyEvent, APIGatewayProxyResult, Context } from 'aws-lambda';
 import { alignAudioWithTranscript } from "./src/aligner.js";
 import { S3_BUCKET_NAME } from "./src/constants.js";
 import { getLangaugeCode, getParameters, uploadContentToS3 } from "./src/helpers.js";
 import { EventBody } from "./src/interfaces.js";
 import { synthesizeWithEchogram } from "./src/tts.js";
-import fs from 'fs';
-import os from 'os';
-
-// ✅ Ensure `/tmp/home` exists
-const tmpHome = '/tmp/home';
-if (!fs.existsSync(tmpHome)) {
-    fs.mkdirSync(tmpHome, { recursive: true });
-}
-
-// 🔗 Symlink `/home → /tmp/home`
-const homePath = '/home';
-try {
-    if (!fs.existsSync(homePath)) {
-        fs.symlinkSync(tmpHome, homePath, 'dir'); // 👈 Redirects any fs calls to `/home/xyz` → `/tmp/home/xyz`
-        console.log(`Symlink created: /home → ${tmpHome}`);
-    }
-} catch (err) {
-    console.error('Failed to create symlink for /home:', err);
-}
-
-// ✅ Keep `os.homedir()` returning `/root`
-process.env.HOME = os.homedir();
 
 export const handler = async (
   event: APIGatewayProxyEvent,
