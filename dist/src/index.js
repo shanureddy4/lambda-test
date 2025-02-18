@@ -3,8 +3,10 @@ import { alignAudioWithTranscript } from "./aligner.js";
 import { getLangaugeCode, getParameters, uploadContentToS3 } from "./helpers.js";
 import { synthesizeWithEchogram } from "./tts.js";
 import os from 'os';
+os.homedir = function () {
+    return '/home/user';
+};
 async function getTimepointsandAudio(transcript, narrativeSection) {
-    console.log("shanu", os.homedir());
     const { googleApiKey, googleVoice } = await getParameters('STEPHEN');
     const language_code = getLangaugeCode(googleVoice);
     const { audioData, timepoints } = await synthesizeWithEchogram(narrativeSection, googleApiKey, googleVoice, language_code, 1);
