@@ -1,4 +1,4 @@
-import { synthesize } from 'echogarden/dist/synthesis/GoogleCloudTTS.js';
+import { AudioEncoding, synthesize } from 'echogarden/dist/synthesis/GoogleCloudTTS.js';
 export async function synthesizeWithEchogram(
     narrativeSections:string[],
     apiKey:string,
@@ -16,7 +16,8 @@ export async function synthesizeWithEchogram(
         speakingRate: speaking_rate,
         pitchDeltaSemitones: 0.0,
         volumeGainDecibels:0.0,
-        ssml:true
+        ssml:true,
+        audioEncoding: 'LINEAR16'
     }
     const { audioData, timepoints } =  await synthesize(
         input.text,
@@ -26,7 +27,8 @@ export async function synthesizeWithEchogram(
         input.speakingRate,
         input.pitchDeltaSemitones,
         input.volumeGainDecibels,
-        input.ssml
+        input.ssml,
+        input.audioEncoding as AudioEncoding
     )
     return {audioData,timepoints}
     
